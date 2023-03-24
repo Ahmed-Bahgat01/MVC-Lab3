@@ -1,7 +1,7 @@
-﻿using Lab3.Models;
+﻿using StudentDeptMemoCRUD.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lab3.Controllers
+namespace StudentDeptMemoCRUD.Controllers
 {
     public class StudentController : Controller
     {

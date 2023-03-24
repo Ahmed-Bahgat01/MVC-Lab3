@@ -1,4 +1,4 @@
-﻿namespace Lab3.Models
+﻿namespace StudentDeptMemoCRUD.Models
 {
     public class Student
     {
