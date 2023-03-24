@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Student>
+@{
+    Layout = null;
+    string deleteConfirmStudent;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel = "stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/fontawesome.js" integrity="sha512-jdXUCm8WsV+k2VGAlEIUYMnSPl8UKt43ql8sJ1ePv58UgrAmMjYgEmfX21G/cr+G5isa5NPPeE5/kBgF9e0b7g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/solid.js" integrity="sha512-Oz/Gu1BCgxqFJ7E+vLJ8DdK+cGEZHhp5q4mp+aJ2mWQica6WQtxWqEZNsgMpAFP+LnnES1nmBMN/tGNSXO75eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.js" integrity="sha512-jdM4CX13QmorrIpE3U+2hOxEO+j6hy9nZFUMIIC8LvNS699p7mxonP7z//UnPGs3Vkn299GKD9FWN60m1tZGxg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.umd.min.js" integrity="sha512-dG5ZzvFUfkBdjYdJbsKdGGh8tOa9fv9wHmiChCFJYHRIW1XgfxN2cGzt2HaEPeunXqbAQXBOJvSBQpGOl0qikw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" integrity="sha512-2KRz1UY/OYx7yBlulfAB4FqeSUMzlkvxCX6IalaJfhrihGo8lbY+AOm5isINAIcGV/sCqi7Pic6Mq6pznnP4mA==" crossorigin="anonymous" referrerpolicy="no-referrer" />*@
+
+</head>
+<body>
+    <table class = "table table-bordered table-hover">
+        <thead class="bg-danger text-light">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model?.Count() == 0)
+            {
+                <tr colspan = "2"> NO DATA</tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    deleteConfirmStudent = $"ID: {item.Id}, NAME: {item.Name}";
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>
+
+                            <a href="/student/details/@item.Id" class="btn btn-success btn-rounded">
+                                <i class="fa-regular fa-circle-info"></i>
+                                Details
+                            </a>
+
+                            <a href="/student/edit/@item.Id" class="btn btn-primary">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                Edit
+                            </a>
+
+                            <a href="/student/delete/@item.Id" class="btn btn-danger"
+
+                                onclick="return confirm('Are you sure you want to delete student \n @deleteConfirmStudent')"
+                            >
+                                <i class="fa-solid fa-trash-can"></i>
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <a href="/student/create" class="btn btn-danger">Add Student</a>
+
+</body>
+</html>

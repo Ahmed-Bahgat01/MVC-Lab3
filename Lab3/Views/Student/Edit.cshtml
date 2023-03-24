@@ -1,0 +1,22 @@
+﻿@model Student
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+</head>
+<body>
+    <form method="post">
+        <input asp-for="Id" type="hidden"/> <br />
+        <label>Name</label> <input asp-for="Name" /> <br />
+        <input type="submit" value="update" class="btn btn-info"/>
+    </form>
+</body>
+</html>
