@@ -1,4 +1,4 @@
-﻿@model Student
+﻿@model Department
 @{
     Layout = "_CLayout";
 }
@@ -9,6 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
+
 </head>
 <body>
     <div style="height:100vh" class="d-flex align-items-center justify-content-center">
@@ -19,8 +20,12 @@
             <div class="mb-3">
                 <label class="form-label">Name</label> <input asp-for="Name" class="form-control w-auto" />
             </div>
+            <div class="mb-3">
+                <label class="form-label">Capacity</label> <input asp-for="Capacity" class="form-control w-auto" />
+            </div>
             <input type="submit" class="btn btn-success w-auto" />
         </form>
     </div>
+    
 </body>
 </html>

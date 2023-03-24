@@ -17,6 +17,10 @@ namespace StudentDeptMemoCRUD.Controllers
         {
             return View();
         }
+        public IActionResult CIndex()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
