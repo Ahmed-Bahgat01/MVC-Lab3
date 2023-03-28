@@ -1,17 +1,9 @@
 ﻿@model Department
 @{
-    Layout = null;
+    Layout = "_CLayout";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-</head>
-<body style="height:100vh" class="d-flex justify-content-center align-items-center text-dark">
+<div style="height:100vh" class="d-flex justify-content-center align-items-center text-dark">
     <div class="bg-warning w-25 p-5 rounded-3 border border-5 border-dark">
         <div class="d-flex align-items-center justify-content-between">
             <h2 class="text-decoration-underline">ID:</h2><h2>@Model.Id</h2>
@@ -23,5 +15,4 @@
             <h2 class="text-decoration-underline">Capacity:</h2><h2>@Model.Capacity</h2>
         </div>
     </div>
-</body>
-</html>
+</div>

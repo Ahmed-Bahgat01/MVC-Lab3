@@ -1,28 +1,17 @@
 ﻿@model Department
 @{
-    Layout = null;
+    Layout = "_CLayout";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-</head>
-<body>
-    <div style="height:100vh" class="d-flex align-items-center justify-content-center">
-        <form asp-action="edit" class="d-flex flex-column align-items-center p-5 border border-3">
-            <input asp-for="Id" type="hidden" /> <br />
-            <div class="mb-3">
-                <label class="form-label">Name</label> <input asp-for="Name" class="form-control w-auto" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Capacity</label> <input asp-for="Capacity" class="form-control w-auto" />
-            </div>
-            <input type="submit" class="btn btn-success w-auto" />
-        </form>
-    </div>
-</body>
-</html>
+<div style="height:100vh" class="d-flex align-items-center justify-content-center">
+    <form asp-action="edit" class="d-flex flex-column align-items-center p-5 border border-3">
+        <input asp-for="Id" type="hidden" /> <br />
+        <div class="mb-3">
+            <label class="form-label">Name</label> <input asp-for="Name" class="form-control w-auto" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Capacity</label> <input asp-for="Capacity" class="form-control w-auto" />
+        </div>
+        <input type="submit" class="btn btn-success w-auto" />
+    </form>
+</div>

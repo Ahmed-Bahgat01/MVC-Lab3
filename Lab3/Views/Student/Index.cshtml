@@ -1,19 +1,10 @@
 ﻿@model IEnumerable<Student>
 @{
-    Layout = null;
+    Layout = "_CLayout";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link rel = "stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.js" integrity="sha512-jdM4CX13QmorrIpE3U+2hOxEO+j6hy9nZFUMIIC8LvNS699p7mxonP7z//UnPGs3Vkn299GKD9FWN60m1tZGxg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-</head>
-<body class="d-flex flex-column justify-content-center align-items-center">
+<div class="d-flex flex-column justify-content-center align-items-center">
     <div class="d-flex flex-column justify-content-center align-items-start w-75 m-4">
         <table class="table table-bordered table-hover">
             <thead class="bg-danger text-light">
@@ -48,7 +39,7 @@
                                 </a>
 
                                 <a href="/student/delete/@item.Id" class="btn btn-danger"
-                           onclick="return confirm('Are you sure you want to delete student \nID: @item.Id, Name: @item.Name')">
+                            onclick="return confirm('Are you sure you want to delete student \nID: @item.Id, Name: @item.Name')">
                                     <i class="fa-solid fa-trash-can"></i>
                                     Delete
                                 </a>
@@ -60,7 +51,4 @@
         </table>
         <a href="/student/create" class="btn btn-danger">Add Student</a>
     </div>
-    
-
-</body>
-</html>
+</div>
