@@ -9,6 +9,11 @@
             <label class="form-label">ID</label> <input asp-for="Id" class="form-control " />
             <span asp-validation-for="Id"></span>
         </div>
-        <partial name="createEditSharedFormElements"></partial>
+        <partial name="createEditSharedFormElements" />
     </form>
+
 </div>
+
+@section Scripts{
+        <partial name="_ValidationScriptsPartial" />
+}
