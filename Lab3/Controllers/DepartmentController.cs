@@ -29,10 +29,13 @@ namespace StudentDeptMemoCRUD.Controllers
         [HttpPost]
         public IActionResult Create(Department? newDept)
         {
-            if(newDept is null)
-                return BadRequest();
-            DeptMoc.AddDepartment(newDept);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                DeptMoc.AddDepartment(newDept);
+                return RedirectToAction("Index");
+            }
+            else
+                return View(newDept);
         }
 
         [HttpGet]
@@ -44,10 +47,13 @@ namespace StudentDeptMemoCRUD.Controllers
         [HttpPost]
         public IActionResult Edit(Department? newDept) 
         {
-            if(newDept is null)
-                return BadRequest();
-            DeptMoc.UpdateDepartment(newDept);
-            return RedirectToAction("Index");
+            if(ModelState.IsValid)
+            {
+                DeptMoc.UpdateDepartment(newDept);
+                return RedirectToAction("Index");
+            }
+            else return View(newDept);
+            
         }
 
         public IActionResult Delete(int id)

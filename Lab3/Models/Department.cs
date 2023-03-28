@@ -1,9 +1,14 @@
-﻿namespace StudentDeptMemoCRUD.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace StudentDeptMemoCRUD.Models
 {
     public class Department
     {
+        [Required]
         public int Id { get; set; }
+        [Required, StringLength(10, MinimumLength = 3)]
         public string? Name { get; set; }
+        [Required, Range(100, 500)]
         public int Capacity { get; set; }
 
         public Department()

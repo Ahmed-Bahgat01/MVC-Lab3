@@ -9,9 +9,11 @@
     <form asp-action="create" class="d-flex flex-column align-items-center p-5 border border-3">
         <div class="mb-3">
             <label class="form-label">ID</label> <input asp-for="Id" class="form-control w-auto" />
+            <span asp-validation-for="Id"></span>
         </div>
         <div class="mb-3">
             <label class="form-label">Name</label> <input asp-for="Name" class="form-control w-auto" />
+            <span asp-validation-for="Name"></span>
         </div>
         <input type="submit" class="btn btn-success w-auto" />
     </form>

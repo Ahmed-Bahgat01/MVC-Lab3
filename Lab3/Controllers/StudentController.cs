@@ -16,8 +16,13 @@ namespace StudentDeptMemoCRUD.Controllers
         [HttpPost]
         public IActionResult Create(Student std)
         {
-            stdMoc.AddStudent(std);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                stdMoc.AddStudent(std);
+                return RedirectToAction("Index");
+            }
+            else
+                return View(std);
         }
 
         [HttpGet]
@@ -46,8 +51,13 @@ namespace StudentDeptMemoCRUD.Controllers
         [HttpPost]
         public IActionResult Edit(Student newStd)
         {
-            stdMoc.UpdateStudent(newStd);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                stdMoc.UpdateStudent(newStd);
+                return RedirectToAction("Index");
+            }
+            else
+                return View(newStd);
         }
 
         public IActionResult Delete(int id)
