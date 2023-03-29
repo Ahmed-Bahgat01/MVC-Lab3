@@ -9,6 +9,9 @@ namespace StudentDeptMemoCRUD.Models
         [Required, StringLength(20,MinimumLength =3)]
         public string Name { get; set; }
 
+        // NAVIGATION PROPS
+        public virtual Department Department { get; set; }
+
         public Student()
         {
             Id = -1;

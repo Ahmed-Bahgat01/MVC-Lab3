@@ -11,6 +11,10 @@ namespace StudentDeptMemoCRUD.Models
         [Required, Range(100, 500)]
         public int Capacity { get; set; }
 
+        // NAVIGATION PROPS
+
+        public virtual ICollection<Student> Students { get; set; } = new HashSet<Student>();
+
         public Department()
         {
             Id= 0;
