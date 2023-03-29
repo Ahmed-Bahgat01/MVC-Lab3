@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using StudentDeptMemoCRUD.Models;
 using StudentDeptMemoCRUD.Service;
 
@@ -7,6 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //builder.Services.AddTransient<IDepartment, DepartmentMoc>();
 builder.Services.AddTransient<IDepartment, DepartmentDB>();
+builder.Services.AddDbContext<Context>(a =>
+{
+    a.UseSqlServer(builder.Configuration.GetConnectionString("DeptStuDbConnection"));
+    //a.UseLazyLoadingProxies();
+});
 
 var app = builder.Build();
 

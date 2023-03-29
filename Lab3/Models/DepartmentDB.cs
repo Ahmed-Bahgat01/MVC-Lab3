@@ -4,33 +4,38 @@ namespace StudentDeptMemoCRUD.Models
 {
     public class DepartmentDB:IDepartment
     {
-        Context _context = new Context();
-        
+        //Context context = new Context();
+        Context context;
+        public DepartmentDB(Context _context)
+        {
+            this.context = _context;
+        }
+
 
 
         public List<Department> GetAllDepartments()
         {
-            return _context.Departments.ToList();
+            return context.Departments.ToList();
         }
         public void AddDepartment(Department newDepartment)
         {
-            _context.Departments.Add(newDepartment);
-            _context.SaveChanges();
+            context.Departments.Add(newDepartment);
+            context.SaveChanges();
         }
 
         public Department? GetDepartmentById(int id)
         {
-            return _context.Departments.FirstOrDefault(x => x.Id == id);
+            return context.Departments.FirstOrDefault(x => x.Id == id);
         }
 
         public void UpdateDepartment(Department newDepartment)
         {
-            Department? oldDept = _context.Departments.FirstOrDefault(d => d.Id == newDepartment.Id);
+            Department? oldDept = context.Departments.FirstOrDefault(d => d.Id == newDepartment.Id);
             if (oldDept is not null)
             {
                 oldDept.Name = newDepartment.Name;
                 oldDept.Capacity = newDepartment.Capacity;
-                _context.SaveChanges();
+                context.SaveChanges();
             }
         }
 
@@ -38,11 +43,11 @@ namespace StudentDeptMemoCRUD.Models
         {
             if (id is not null)
             {
-                Department? toBeDelDept = _context.Departments.FirstOrDefault(d => d.Id == id);
+                Department? toBeDelDept = context.Departments.FirstOrDefault(d => d.Id == id);
                 if (toBeDelDept is not null)
                 {
-                    _context.Departments.Remove(toBeDelDept);
-                    _context.SaveChanges();
+                    context.Departments.Remove(toBeDelDept);
+                    context.SaveChanges();
                 }
             }
         }
