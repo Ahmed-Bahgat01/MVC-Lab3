@@ -1,20 +1,27 @@
-﻿namespace StudentDeptMemoCRUD.Models
+﻿using StudentDeptMemoCRUD.Service;
+
+namespace StudentDeptMemoCRUD.Models
 {
-    public class DepartmentMoc
+    public class DepartmentMoc: IDepartment
     {
-        private static List<Department> departments = new List<Department>()
+        private static List<Department> Departments = new List<Department>()
         {
             new Department(1, "IT", 20),
             new Department(2, "Sales", 40),
             new Department(3, "R&D", 10)
         };
-        public List<Department>? Departments {
-            get { return departments; }
-            set 
-            { 
-                if(departments is null && value is not null)
-                    departments = value;
-            }
+        //public List<Department>? Departments {
+        //    get { return departments; }
+        //    set 
+        //    { 
+        //        if(departments is null && value is not null)
+        //            departments = value;
+        //    }
+        //}
+
+        public List<Department> GetAllDepartments()
+        {
+            return Departments;
         }
 
         public void AddDepartment(Department newDepartment)
@@ -44,7 +51,7 @@
             {
                 Department? toBeDelDept = Departments?.FirstOrDefault(d=> d.Id == id);
                 if(toBeDelDept is not null)
-                    departments.Remove(toBeDelDept);
+                    Departments.Remove(toBeDelDept);
             }
         }
     }
