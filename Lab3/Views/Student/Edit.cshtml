@@ -12,6 +12,12 @@
             <label class="form-label">Name</label> <input asp-for="Name" class="form-control w-auto" />
             <span asp-validation-for="Name"></span>
         </div>
+        <div class="mb-3 w-100">
+            <label class="form-label">Department</label>
+            <select class="form-select" asp-for="DepartmentId" asp-items="ViewBag.Departments">
+            </select>
+            <span asp-validation-for="Department"></span>
+        </div>
         <input type="submit" class="btn btn-success w-auto" />
     </form>
 </div>

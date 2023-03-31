@@ -1,8 +1,8 @@
-﻿using StudentDeptMemoCRUD.Service;
+﻿using StudentDeptMemoCRUD.Models;
 
-namespace StudentDeptMemoCRUD.Models
+namespace StudentDeptMemoCRUD.Service
 {
-    public class DepartmentMoc: IDepartment
+    public class DepartmentMoc : IDepartment
     {
         private static List<Department> Departments = new List<Department>()
         {
@@ -37,20 +37,20 @@ namespace StudentDeptMemoCRUD.Models
 
         public void UpdateDepartment(Department newDepartment)
         {
-            Department? oldDept = Departments?.FirstOrDefault(d=>d.Id == newDepartment.Id);
-            if(oldDept is not null)
+            Department? oldDept = Departments?.FirstOrDefault(d => d.Id == newDepartment.Id);
+            if (oldDept is not null)
             {
-                oldDept.Name= newDepartment.Name;
-                oldDept.Capacity= newDepartment.Capacity;
+                oldDept.Name = newDepartment.Name;
+                oldDept.Capacity = newDepartment.Capacity;
             }
         }
 
         public void DeleteDepartment(int? id)
         {
-            if(id is not null)
+            if (id is not null)
             {
-                Department? toBeDelDept = Departments?.FirstOrDefault(d=> d.Id == id);
-                if(toBeDelDept is not null)
+                Department? toBeDelDept = Departments?.FirstOrDefault(d => d.Id == id);
+                if (toBeDelDept is not null)
                     Departments.Remove(toBeDelDept);
             }
         }

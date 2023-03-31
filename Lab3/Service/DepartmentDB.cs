@@ -1,14 +1,14 @@
-﻿using StudentDeptMemoCRUD.Service;
+﻿using StudentDeptMemoCRUD.Models;
 
-namespace StudentDeptMemoCRUD.Models
+namespace StudentDeptMemoCRUD.Service
 {
-    public class DepartmentDB:IDepartment
+    public class DepartmentDB : IDepartment
     {
         //Context context = new Context();
         Context context;
         public DepartmentDB(Context _context)
         {
-            this.context = _context;
+            context = _context;
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentDeptMemoCRUD.Models
 {
@@ -9,12 +10,15 @@ namespace StudentDeptMemoCRUD.Models
         [Required, StringLength(20,MinimumLength =3)]
         public string Name { get; set; }
 
+        [ForeignKey("Department")]
+        public int? DepartmentId { get; set; }
+
         // NAVIGATION PROPS
-        public virtual Department Department { get; set; }
+        public virtual Department? Department { get; set; }
 
         public Student()
         {
-            Id = -1;
+            Id = 0;
             Name = "NONAME";
         }
 

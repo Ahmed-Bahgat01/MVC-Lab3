@@ -11,6 +11,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Department</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -26,6 +27,12 @@
                         <tr>
                             <td>@item.Id</td>
                             <td>@item.Name</td>
+                            <td>
+                                @*@(item.Department?.ToString() ?? "N/A")*@
+                                @*@(item.Department.Name)*@
+                                @Html.DisplayFor(modelItem => item.Department.Name)
+                                
+                            </td>
                             <td>
 
                                 <a href="/student/details/@item.Id" class="btn btn-success btn-rounded">
