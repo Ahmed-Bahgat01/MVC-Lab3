@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StudentDeptMemoCRUD.Models;
 
 namespace StudentDeptMemoCRUD.Models
 {
@@ -19,5 +20,6 @@ namespace StudentDeptMemoCRUD.Models
         
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Department> Departments { get;set; }
+        public DbSet<StudentDeptMemoCRUD.Models.Course>? Course { get; set; }
     }
 }

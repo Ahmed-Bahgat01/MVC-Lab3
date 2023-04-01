@@ -6,8 +6,15 @@ namespace StudentDeptMemoCRUD.Models
     {
         [Required,Key]
         public int Id { get; set; }
+
         [Required, StringLength(10, MinimumLength = 2)]
         public string? Name { get; set; }
+
+        [Required, Range(9, 18)]
+        public int LectureHours { get; set; }
+
+        [Required, Range(9, 18)]
+        public int LabHours { get; set; }
 
         // NAVIGATION PROPS
         public virtual ICollection<Department> Departments { get; set; } = new List<Department>();
