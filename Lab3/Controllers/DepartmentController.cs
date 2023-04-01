@@ -107,10 +107,10 @@ namespace StudentDeptMemoCRUD.Controllers
             return View(targetDept);
         }
 
-        //public IActionResult EditStudentsGrades(int deptId,int courseId)
+        //public IActionResult EditStudentsGrades(int deptId, int courseId)
         //{
         //    Department targetDept = Db.Departments.GetById(deptId);
-        //    Course targetCourse = targetDept.Courses.FirstOrDefault(a=>a.Id == courseId);
+        //    Course targetCourse = targetDept.Courses.FirstOrDefault(a => a.Id == courseId);
 
         //}
 
