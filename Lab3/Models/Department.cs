@@ -6,7 +6,7 @@ namespace StudentDeptMemoCRUD.Models
     {
         [Required]
         public int Id { get; set; }
-        [Required, StringLength(10, MinimumLength = 3)]
+        [Required, StringLength(10, MinimumLength = 2)]
         public string? Name { get; set; }
         [Required, Range(100, 500)]
         public int Capacity { get; set; }
@@ -14,6 +14,8 @@ namespace StudentDeptMemoCRUD.Models
         // NAVIGATION PROPS
 
         public virtual ICollection<Student> Students { get; set; } = new HashSet<Student>();
+        public virtual ICollection<Course> Courses { get; set; } = new HashSet<Course>();
+
 
         public Department()
         {
