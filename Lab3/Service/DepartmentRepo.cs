@@ -8,6 +8,11 @@ namespace StudentDeptMemoCRUD.Service
         {
         }
 
+        public IEnumerable<Course> GetAllCourses()
+        {
+            return context.Courses.ToList();
+        }
+
         /// <summary>
         ///     this method searches for student by Id updates all it's values
         /// </summary>

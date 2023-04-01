@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateCourses";
+    Layout = "~/Views/Shared/_CLayout.cshtml";
+}
+
+<h1>UpdateCourses</h1>
+<form method="post">
+    <div>
+        <h1>
+            Courses IN Dept
+        </h1>
+        <select name="coursesToRemove" asp-items="ViewBag.coursesInDept" multiple>
+
+        </select>
+    </div>
+    <div>
+        <h1>
+            Courses Not IN Dept
+        </h1>
+        <select name="coursesToAdd" asp-items="ViewBag.coursesNotInDept" multiple>
+        </select>
+    </div>
+    <input type="submit" value="update"/>
+</form>

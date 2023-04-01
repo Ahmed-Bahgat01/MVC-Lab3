@@ -4,6 +4,7 @@
     {
         IDepartmentRepo Departments { get; }
         IStudentRepo Students { get; }
+        ICourseRepo Courses { get; }
         int Save();
     }
 }
