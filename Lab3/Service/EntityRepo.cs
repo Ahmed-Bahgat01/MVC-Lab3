@@ -33,15 +33,15 @@ namespace StudentDeptMemoCRUD.Service
                 context.Set<T>().Remove(entity);
             }
         }
-        public void Save()
-        {
-            context.SaveChanges();
-        }
+        //public void Save()
+        //{
+        //    context.SaveChanges();
+        //}
 
-        public void Dispose()
-        {
-            context.Dispose();
-        }
+        //public void Dispose()
+        //{
+        //    context.Dispose();
+        //}
 
         //public void Update(T entity)
         //{

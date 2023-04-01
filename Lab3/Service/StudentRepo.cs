@@ -26,7 +26,8 @@ namespace StudentDeptMemoCRUD.Service
             Student? toBeUpdated = GetById(newStudent.Id);
             if(toBeUpdated != null)
             {
-                toBeUpdated = newStudent;
+                toBeUpdated.Name = newStudent.Name;
+                toBeUpdated.DepartmentId = newStudent.DepartmentId;
             }
             return toBeUpdated;
         }

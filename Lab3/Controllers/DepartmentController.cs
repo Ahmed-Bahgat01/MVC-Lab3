@@ -6,21 +6,21 @@ namespace StudentDeptMemoCRUD.Controllers
 {
     public class DepartmentController : Controller
     {
-        private IDepartmentRepo Db;
+        private IUnitOfWork Db;
 
-        public DepartmentController(IDepartmentRepo _Db)
+        public DepartmentController(IUnitOfWork _Db)
         {
             Db= _Db;
         }
         public IActionResult Index()
         {
-            return View(Db.GetAll());
+            return View(Db.Departments.GetAll());
         }
         public IActionResult Details(int? id)
         {
             if (id is null)
                 return BadRequest();
-            Department? requestedDept = Db.GetById(id.Value);
+            Department? requestedDept = Db.Departments.GetById(id.Value);
             if(requestedDept is null)
                 return NotFound();
             return View(requestedDept);
@@ -37,7 +37,8 @@ namespace StudentDeptMemoCRUD.Controllers
         {
             if (ModelState.IsValid)
             {
-                Db.Add(newDept);
+                Db.Departments.Add(newDept);
+                Db.Save();
                 return RedirectToAction("Index");
             }
             else
@@ -47,7 +48,7 @@ namespace StudentDeptMemoCRUD.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(Db.GetById(id));
+            return View(Db.Departments.GetById(id));
         }
 
         [HttpPost]
@@ -55,7 +56,8 @@ namespace StudentDeptMemoCRUD.Controllers
         {
             if(ModelState.IsValid)
             {
-                Db.Update(newDept);
+                Db.Departments.Update(newDept);
+                Db.Save();
                 return RedirectToAction("Index");
             }
             else return View(newDept);
@@ -64,8 +66,9 @@ namespace StudentDeptMemoCRUD.Controllers
 
         public IActionResult Delete(int id)
         {
-            Department? toBeRemoved = Db.GetById(id);
-            Db.Remove(toBeRemoved);
+            Department? toBeRemoved = Db.Departments.GetById(id);
+            Db.Departments.Remove(toBeRemoved);
+            Db.Save();
             return RedirectToAction("Index");
         }
 

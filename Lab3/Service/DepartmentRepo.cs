@@ -24,10 +24,10 @@ namespace StudentDeptMemoCRUD.Service
                 toBeUpdated = GetById(newDepartment.Id);
                 if (toBeUpdated != null)
                 {
-                    toBeUpdated = newDepartment;
+                    toBeUpdated.Name = newDepartment.Name;
+                    toBeUpdated.Capacity = newDepartment.Capacity;
                 }
             }
-            
             return toBeUpdated;
         }
     }

@@ -8,17 +8,17 @@ namespace StudentDeptMemoCRUD.Controllers
     public class StudentController : Controller
     {
         
-        private IStudentRepo Db;
+        private IUnitOfWork Db;
 
-        public StudentController(IStudentRepo db)
+        public StudentController(IUnitOfWork db)
         {
             Db = db;
         }
 
         public IActionResult Index()
         {
-            
-            return View(Db.GetAll());
+            List<Student> lst = Db.Students.GetAll().ToList();
+            return View(lst);
         }
 
         [HttpPost]
@@ -26,12 +26,13 @@ namespace StudentDeptMemoCRUD.Controllers
         {
             if (ModelState.IsValid)
             {
-                Db.Add(std);
+                Db.Students.Add(std);
+                Db.Save();
                 return RedirectToAction("Index");
             }
             else
             {
-                ViewBag.Departments = new SelectList(Db.GetAllDepartments(), "Id", "Name");
+                ViewBag.Departments = new SelectList(Db.Students.GetAllDepartments(), "Id", "Name");
                 return View(std);
             }
         }
@@ -39,7 +40,7 @@ namespace StudentDeptMemoCRUD.Controllers
         [HttpGet]
         public IActionResult Create(/*int id*/) 
         {
-            ViewBag.Departments = new SelectList(Db.GetAllDepartments(),"Id","Name");
+            ViewBag.Departments = new SelectList(Db.Students.GetAllDepartments(),"Id","Name");
             return View();
         }
 
@@ -47,7 +48,7 @@ namespace StudentDeptMemoCRUD.Controllers
         {
             if(Id is null)
                 return BadRequest();
-            Student? std = Db.GetById(Id.Value);
+            Student? std = Db.Students.GetById(Id.Value);
             if(std is null)
                 return NotFound();
             else
@@ -57,8 +58,8 @@ namespace StudentDeptMemoCRUD.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            ViewBag.Departments = new SelectList(Db.GetAllDepartments(), "Id", "Name");
-            return View(Db.GetAll().FirstOrDefault(std => std.Id == id));
+            ViewBag.Departments = new SelectList(Db.Students.GetAllDepartments(), "Id", "Name");
+            return View(Db.Students.GetAll().FirstOrDefault(std => std.Id == id));
         }
 
         [HttpPost]
@@ -66,20 +67,22 @@ namespace StudentDeptMemoCRUD.Controllers
         {
             if (ModelState.IsValid)
             {
-                Db.Update(newStd);
+                Db.Students.Update(newStd);
+                Db.Save();
                 return RedirectToAction("Index");
             }
             else
             {
-                ViewBag.Departments = new SelectList(Db.GetAllDepartments(), "Id", "Name");
+                ViewBag.Departments = new SelectList(Db.Students.GetAllDepartments(), "Id", "Name");
                 return View(newStd);
             }
         }
 
         public IActionResult Delete(int id)
         {
-            Student? toBeRemoved = Db.GetById(id);
-            Db.Remove(toBeRemoved);
+            Student? toBeRemoved = Db.Students.GetById(id);
+            Db.Students.Remove(toBeRemoved);
+            Db.Save();
             return RedirectToAction("index");
         }
 

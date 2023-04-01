@@ -11,11 +11,12 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddTransient<IStudent, StudentDB>();
 builder.Services.AddTransient<IStudentRepo, StudentRepo>();
 builder.Services.AddTransient<IDepartmentRepo, DepartmentRepo>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDbContext<Context>(a =>
 {
     a.UseSqlServer(builder.Configuration.GetConnectionString("DeptStuDbConnection"));
     a.UseLazyLoadingProxies();
-});
+},ServiceLifetime.Scoped);
 
 var app = builder.Build();
 
