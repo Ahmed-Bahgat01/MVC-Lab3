@@ -17,6 +17,7 @@ namespace StudentDeptMemoCRUD.Models
         public int LabHours { get; set; }
 
         // NAVIGATION PROPS
-        public virtual ICollection<Department> Departments { get; set; } = new List<Department>();
+        public virtual ICollection<Department> Departments { get; set; } = new HashSet<Department>();
+        public virtual ICollection<Student> Students { get; set; } = new HashSet<Student>();
     }
 }

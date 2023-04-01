@@ -15,6 +15,7 @@ namespace StudentDeptMemoCRUD.Models
 
         // NAVIGATION PROPS
         public virtual Department? Department { get; set; }
+        public virtual ICollection<Course> Courses { get; set; } = new HashSet<Course>();
 
         public Student()
         {
