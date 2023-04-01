@@ -6,7 +6,6 @@ namespace StudentDeptMemoCRUD.Models
     {
         public Context(DbContextOptions options):base(options)
         {
-
         }
 
         //public Context() { }

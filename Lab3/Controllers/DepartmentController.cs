@@ -6,21 +6,21 @@ namespace StudentDeptMemoCRUD.Controllers
 {
     public class DepartmentController : Controller
     {
-        private IDepartment Db;
+        private IDepartmentRepo Db;
 
-        public DepartmentController(IDepartment _Db)
+        public DepartmentController(IDepartmentRepo _Db)
         {
             Db= _Db;
         }
         public IActionResult Index()
         {
-            return View(Db.GetAllDepartments());
+            return View(Db.GetAll());
         }
         public IActionResult Details(int? id)
         {
             if (id is null)
                 return BadRequest();
-            Department? requestedDept = Db.GetDepartmentById(id.Value);
+            Department? requestedDept = Db.GetById(id.Value);
             if(requestedDept is null)
                 return NotFound();
             return View(requestedDept);
@@ -37,7 +37,7 @@ namespace StudentDeptMemoCRUD.Controllers
         {
             if (ModelState.IsValid)
             {
-                Db.AddDepartment(newDept);
+                Db.Add(newDept);
                 return RedirectToAction("Index");
             }
             else
@@ -47,7 +47,7 @@ namespace StudentDeptMemoCRUD.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(Db.GetDepartmentById(id));
+            return View(Db.GetById(id));
         }
 
         [HttpPost]
@@ -55,7 +55,7 @@ namespace StudentDeptMemoCRUD.Controllers
         {
             if(ModelState.IsValid)
             {
-                Db.UpdateDepartment(newDept);
+                Db.Update(newDept);
                 return RedirectToAction("Index");
             }
             else return View(newDept);
@@ -64,7 +64,8 @@ namespace StudentDeptMemoCRUD.Controllers
 
         public IActionResult Delete(int id)
         {
-            Db.DeleteDepartment(id);
+            Department? toBeRemoved = Db.GetById(id);
+            Db.Remove(toBeRemoved);
             return RedirectToAction("Index");
         }
 

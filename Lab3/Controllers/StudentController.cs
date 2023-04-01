@@ -8,9 +8,9 @@ namespace StudentDeptMemoCRUD.Controllers
     public class StudentController : Controller
     {
         
-        private IStudent Db;
+        private IStudentRepo Db;
 
-        public StudentController(IStudent db)
+        public StudentController(IStudentRepo db)
         {
             Db = db;
         }
@@ -18,7 +18,7 @@ namespace StudentDeptMemoCRUD.Controllers
         public IActionResult Index()
         {
             
-            return View(Db.GettAllStudents());
+            return View(Db.GetAll());
         }
 
         [HttpPost]
@@ -26,7 +26,7 @@ namespace StudentDeptMemoCRUD.Controllers
         {
             if (ModelState.IsValid)
             {
-                Db.AddStudent(std);
+                Db.Add(std);
                 return RedirectToAction("Index");
             }
             else
@@ -37,7 +37,7 @@ namespace StudentDeptMemoCRUD.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create(int id) 
+        public IActionResult Create(/*int id*/) 
         {
             ViewBag.Departments = new SelectList(Db.GetAllDepartments(),"Id","Name");
             return View();
@@ -47,7 +47,7 @@ namespace StudentDeptMemoCRUD.Controllers
         {
             if(Id is null)
                 return BadRequest();
-            Student? std = Db.GetStudentById(Id.Value);
+            Student? std = Db.GetById(Id.Value);
             if(std is null)
                 return NotFound();
             else
@@ -58,7 +58,7 @@ namespace StudentDeptMemoCRUD.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Departments = new SelectList(Db.GetAllDepartments(), "Id", "Name");
-            return View(Db.GettAllStudents().FirstOrDefault(std => std.Id == id));
+            return View(Db.GetAll().FirstOrDefault(std => std.Id == id));
         }
 
         [HttpPost]
@@ -66,7 +66,7 @@ namespace StudentDeptMemoCRUD.Controllers
         {
             if (ModelState.IsValid)
             {
-                Db.UpdateStudent(newStd);
+                Db.Update(newStd);
                 return RedirectToAction("Index");
             }
             else
@@ -78,7 +78,8 @@ namespace StudentDeptMemoCRUD.Controllers
 
         public IActionResult Delete(int id)
         {
-            Db.DeleteStudent(id);
+            Student? toBeRemoved = Db.GetById(id);
+            Db.Remove(toBeRemoved);
             return RedirectToAction("index");
         }
 
