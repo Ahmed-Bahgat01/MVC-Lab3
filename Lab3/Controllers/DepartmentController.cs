@@ -111,6 +111,7 @@ namespace StudentDeptMemoCRUD.Controllers
         //{
         //    Department targetDept = Db.Departments.GetById(deptId);
         //    Course targetCourse = targetDept.Courses.FirstOrDefault(a => a.Id == courseId);
+        //    //List<Student> studentsInCourse = targetCourse.stude
 
         //}
 
