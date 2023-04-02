@@ -23,7 +23,7 @@
                 }
                 else
                 {
-                    foreach (var item in Model)
+                    foreach (var item in Model ?? new List<Department>())
                     {
                         <tr>
                             <td>@item.Id</td>

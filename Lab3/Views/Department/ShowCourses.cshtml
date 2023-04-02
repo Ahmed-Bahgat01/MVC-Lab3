@@ -24,7 +24,7 @@
         }
         else
         {
-            foreach (var item in Model.Courses)
+            foreach (var item in Model?.Courses ?? new List<Course>())
             {
                 <tr>
                     <td>@item.Id</td>
@@ -32,7 +32,7 @@
                     <td>@item.LectureHours</td>
                     <td>@item.LabHours</td>
                     <td>
-                        <a asp-action="EditStudentsGrades" asp-route-deptId="@Model.Id" asp-route-courseId="@item.Id" class="btn btn-dark">
+                        <a asp-action="EditStudentsGrades" asp-route-deptId="@Model?.Id" asp-route-courseId="@item.Id" class="btn btn-dark">
                             <i class="fa-regular fa-circle-info"></i>
                             Edit Grades
                         </a>

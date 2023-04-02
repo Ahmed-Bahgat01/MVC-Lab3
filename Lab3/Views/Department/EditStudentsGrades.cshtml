@@ -11,10 +11,10 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Student.Name)
+                    Student Name
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Grade)
+                    Grade
                 </th>
             </tr>
         </thead>
@@ -23,11 +23,10 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Student.Name)
+                        @item?.Student?.Name)
                     </td>
                     <td>
-                        @*@Html.DisplayFor(modelItem => item.Grade)*@
-                        <input type="number" value="@item.Grade" name="stdGrade.@item.StudentId" />
+                        <input type="number" value="@item?.Grade" name="stdGrade.@item?.StudentId" />
                     </td>
                 </tr>
             }
