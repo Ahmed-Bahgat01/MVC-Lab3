@@ -49,7 +49,7 @@ namespace StudentDeptMemoCRUD.Controllers
             if(Id is null)
                 return BadRequest();
             Student? std = Db.Students.GetById(Id.Value);
-            if(std is null)
+            if (std is null)
                 return NotFound();
             else
                 return View(std);
