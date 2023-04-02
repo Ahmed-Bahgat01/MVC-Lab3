@@ -16,7 +16,7 @@ builder.Services.AddDbContext<Context>(a =>
 {
     a.UseSqlServer(builder.Configuration.GetConnectionString("DeptStuDbConnection"));
     a.UseLazyLoadingProxies();
-},ServiceLifetime.Scoped);
+},ServiceLifetime.Transient);
 
 var app = builder.Build();
 

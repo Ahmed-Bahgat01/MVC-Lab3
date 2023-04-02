@@ -107,13 +107,33 @@ namespace StudentDeptMemoCRUD.Controllers
             return View(targetDept);
         }
 
-        //public IActionResult EditStudentsGrades(int deptId, int courseId)
-        //{
-        //    Department targetDept = Db.Departments.GetById(deptId);
-        //    Course targetCourse = targetDept.Courses.FirstOrDefault(a => a.Id == courseId);
-        //    //List<Student> studentsInCourse = targetCourse.stude
+        public IActionResult EditStudentsGrades(int deptId, int courseId)
+        {
+            //Department? targetDept = Db.Departments.GetById(deptId);
+            //Course targetCourse = targetDept.Courses.FirstOrDefault(a => a.Id == courseId);
+            //Course? targetCourse = Db.Courses.GetById(courseId);
+            List<StudentCourse> courseStudentsGradesInDepartment = Db.StudentCourses.GetAll()
+                .Where(a=>a.CourseId == courseId && a.Student?.DepartmentId == deptId)
+                .ToList();
 
-        //}
+            //List<StudentCourse> courseStudentsGradesInDepartment = targetCourse.StudentCourses
+            //    .Where(a => a.CourseId == targetCourse.Id && a.Student.DepartmentId == targetDept.Id)
+            //    //.Select(a=> new { a.Student.Name, a.Grade } )
+            //    .ToList();
+            return View(courseStudentsGradesInDepartment);
+        }
+
+        [HttpPost]
+        public IActionResult EditStudentsGrades(int deptId, int courseId, Dictionary<int, int> stdGrade)
+        {
+            foreach (var item in stdGrade)
+            {
+                Db.StudentCourses.GetById(item.Key,courseId).Grade = item.Value;
+            }
+            Db.Save();
+            //return RedirectToAction(nameof(EditStudentsGrades(deptId, courseId)));
+            return RedirectToAction(nameof(ShowCourses), new {id = deptId});
+        }
 
     }
 }

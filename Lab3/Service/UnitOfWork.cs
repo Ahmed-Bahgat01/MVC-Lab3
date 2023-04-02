@@ -9,12 +9,14 @@ namespace StudentDeptMemoCRUD.Service
         public IDepartmentRepo Departments { get; private set; }
         public IStudentRepo Students { get; private set; }
         public ICourseRepo Courses { get; private set; }
+        public IStudentCourseRepo StudentCourses { get; private set; }
         public UnitOfWork(Context _context)
         {
             context = _context;
             Departments = new DepartmentRepo(_context);
             Students = new StudentRepo(_context);
             Courses = new CourseRepo(_context);
+            StudentCourses = new StudentCourseRepo(_context);
         }
         public int Save()
         {
