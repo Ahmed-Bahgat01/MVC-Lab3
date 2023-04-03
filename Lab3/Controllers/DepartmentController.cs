@@ -96,29 +96,37 @@ namespace StudentDeptMemoCRUD.Controllers
         [HttpPost]
         public IActionResult UpdateCourses(int id,int[] coursesToRemove,int[] coursesToAdd)
         {
-            Department? targetDept = Db.Departments.GetById(id);
-            if(targetDept is not null)
+            if (ModelState.IsValid)
             {
-                Course? pointerCourse;
-                foreach (var courseId in coursesToRemove)
+                Department? targetDept = Db.Departments.GetById(id);
+                if (targetDept is not null)
                 {
-                    pointerCourse = Db.Courses.GetById(courseId);
-                    if(pointerCourse is not null)
-                        targetDept.Courses.Remove(pointerCourse);
+                    Course? pointerCourse;
+                    foreach (var courseId in coursesToRemove)
+                    {
+                        pointerCourse = Db.Courses.GetById(courseId);
+                        if (pointerCourse is not null)
+                            targetDept.Courses.Remove(pointerCourse);
+                    }
+                    foreach (var courseId in coursesToAdd)
+                    {
+                        pointerCourse = Db.Courses.GetById(courseId);
+                        if (pointerCourse is not null)
+                            targetDept.Courses.Add(pointerCourse);
+                    }
+                    Db.Save();
+                    return RedirectToAction("Index");
                 }
-                foreach (var courseId in coursesToAdd)
+                else
                 {
-                    pointerCourse = Db.Courses.GetById(courseId);
-                    if (pointerCourse is not null)
-                        targetDept.Courses.Add(pointerCourse);
+                    return NotFound();
                 }
-                Db.Save();
-                return RedirectToAction("Index");
             }
             else
             {
-                return NotFound();
+                return View();
             }
+            
         }
 
         public IActionResult ShowCourses(int id)
@@ -141,17 +149,27 @@ namespace StudentDeptMemoCRUD.Controllers
         [HttpPost]
         public IActionResult EditStudentsGrades(int deptId, int courseId, Dictionary<int, int> stdGrade)
         {
-            StudentCourse? targetStudentCourse;
-            foreach (var item in stdGrade)
+            if (ModelState.IsValid)
             {
-                targetStudentCourse = Db.StudentCourses.GetById(item.Key, courseId);
-                if(targetStudentCourse is not null)
+                StudentCourse? targetStudentCourse;
+                foreach (var item in stdGrade)
                 {
-                    targetStudentCourse.Grade = item.Value;
+                    targetStudentCourse = Db.StudentCourses.GetById(item.Key, courseId);
+                    if (targetStudentCourse is not null)
+                    {
+                        targetStudentCourse.Grade = item.Value;
+                    }
                 }
+                Db.Save();
+                return RedirectToAction(nameof(ShowCourses), new { id = deptId });
             }
-            Db.Save();
-            return RedirectToAction(nameof(ShowCourses), new {id = deptId});
+            else 
+            {
+                List<StudentCourse> courseStudentsGradesInDepartment = Db.StudentCourses.GetAll()
+                .Where(a => a.CourseId == courseId && a.Student?.DepartmentId == deptId)
+                .ToList();
+                return View(courseStudentsGradesInDepartment); 
+            }
         }
 
     }

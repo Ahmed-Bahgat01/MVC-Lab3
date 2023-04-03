@@ -8,9 +8,9 @@ namespace StudentDeptMemoCRUD.Service
         {
         }
 
-        public IEnumerable<Department> GetAllDepartments()
+        public IEnumerable<Department>? GetAllDepartments()
         {
-            return context.Departments.ToList();
+            return context.Departments?.ToList();
         }
 
         /// <summary>

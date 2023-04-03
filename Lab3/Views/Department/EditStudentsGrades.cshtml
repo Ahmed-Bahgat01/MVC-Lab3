@@ -23,15 +23,21 @@
             {
                 <tr>
                     <td>
-                        @item?.Student?.Name)
+                        @item?.Student?.Name
                     </td>
                     <td>
                         <input type="number" value="@item?.Grade" name="stdGrade.@item?.StudentId" />
+                        <span asp-validation-for="@(item.Grade)"></span>
                     </td>
                 </tr>
             }
+            
         </tbody>
     </table>
     <input type="submit" value="submit" class="btn btn-danger" />
 </form>
 
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

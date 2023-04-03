@@ -8,9 +8,9 @@ namespace StudentDeptMemoCRUD.Service
         {
         }
 
-        public IEnumerable<Course> GetAllCourses()
+        public IEnumerable<Course>? GetAllCourses()
         {
-            return context.Courses.ToList();
+            return context.Courses?.ToList();
         }
 
         /// <summary>
