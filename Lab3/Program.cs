@@ -6,9 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//builder.Services.AddTransient<IDepartment, DepartmentMoc>();
-//builder.Services.AddTransient<IDepartment, DepartmentDB>();
-//builder.Services.AddTransient<IStudent, StudentDB>();
 builder.Services.AddTransient<IStudentRepo, StudentRepo>();
 builder.Services.AddTransient<IDepartmentRepo, DepartmentRepo>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -17,6 +14,8 @@ builder.Services.AddDbContext<Context>(a =>
     a.UseSqlServer(builder.Configuration.GetConnectionString("DeptStuDbConnection"));
     a.UseLazyLoadingProxies();
 },ServiceLifetime.Transient);
+
+//builder.Services.AddAuthentication(auth)
 
 var app = builder.Build();
 

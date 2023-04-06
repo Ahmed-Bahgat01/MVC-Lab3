@@ -33,9 +33,22 @@
                 </div>
             </dl>
             <div class=" w-auto h-auto">
-                <img src="/notExist" />
+                <img src="/images/students/profiles/@Model.ImageName" />
+                @if (Model.ImageName is not null)
+                {
+                    <div>
+                        <a class="btn btn-outline-primary" href="@Url.Action("DownloadProfileImage", "student",new{ImageName = Model.ImageName})">download Image</a>
+                    </div>
+                }
             </div>
+            
         </div>
+        @*@if (Model.ImageName is not null)
+        {
+            <div>
+                <a class="btn btn-outline-secondary" href="@Url.Action("DownloadProfileImage", "student",new{ImageName = Model.ImageName})">download Image</a>
+            </div>
+        }*@
 
     </div>
     <table class="table table-hover table-bordered w-50 m-3">

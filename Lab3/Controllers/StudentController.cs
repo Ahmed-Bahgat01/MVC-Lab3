@@ -22,12 +22,27 @@ namespace StudentDeptMemoCRUD.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Student? std)
+        public async Task<IActionResult> Create(Student? std)
         {
             if (ModelState.IsValid)
             {
                 Db.Students.Add(std);
                 Db.Save();
+                // saving image
+                if (std?.ImageFile != null)
+                {
+                    string imgName =
+                        std.Id.ToString() +
+                        "." +
+                        std.ImageFile.FileName.Split('.').Last();
+                    using (var obj = new FileStream(@".\wwwroot\images\students\profiles\" + imgName, FileMode.Create))
+                    {
+                        await std.ImageFile.CopyToAsync(obj);
+                        std.ImageName = imgName;
+                        Db.Students.Update(std);
+                        Db.Save();
+                    }
+                }
                 return RedirectToAction("Index");
             }
             else
@@ -63,12 +78,32 @@ namespace StudentDeptMemoCRUD.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Student newStd)
+        public async Task<IActionResult> Edit(Student newStd)
         {
             if (ModelState.IsValid)
             {
+                
                 Db.Students.Update(newStd);
                 Db.Save();
+                // saving image
+                if (newStd.ImageFile != null)
+                {
+                    string imgName = 
+                        newStd.Id.ToString() +
+                        "." +
+                        newStd.ImageFile.FileName.Split('.').Last();
+                    using (var obj = new FileStream(@".\wwwroot\images\students\profiles\"+imgName, FileMode.Create))
+                    {
+                        await newStd.ImageFile.CopyToAsync(obj);
+                        newStd.ImageName = imgName;
+                        Db.Students.Update(newStd);
+                        Db.Save();
+                    }
+                }
+                else
+                {
+
+                }
                 return RedirectToAction("Index");
             }
             else
@@ -76,6 +111,11 @@ namespace StudentDeptMemoCRUD.Controllers
                 ViewBag.Departments = new SelectList(Db.Students.GetAllDepartments(), "Id", "Name");
                 return View(newStd);
             }
+        }
+
+        public IActionResult DownloadProfileImage(string ImageName)
+        {
+            return File($"images/students/profiles/{ImageName}", "image/png", "profileImage.png");
         }
 
         public IActionResult Delete(int id)

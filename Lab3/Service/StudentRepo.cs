@@ -28,6 +28,8 @@ namespace StudentDeptMemoCRUD.Service
             {
                 toBeUpdated.Name = newStudent.Name;
                 toBeUpdated.DepartmentId = newStudent.DepartmentId;
+                toBeUpdated.ImageName = newStudent.ImageName;
+                //toBeUpdated = newStudent;
             }
             return toBeUpdated;
         }
