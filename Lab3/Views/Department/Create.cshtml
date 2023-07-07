@@ -1,31 +1,19 @@
 ﻿@model Department
 @{
-    Layout = "_CLayout";
+    ViewBag.Title = "Create";
 }
 
-<!DOCTYPE html>
+<div style="height:100vh" class="d-flex align-items-center justify-content-center">
+    <form asp-action="create" class="d-flex flex-column align-items-center p-5 border border-3 w-25">
+        @*<div class="mb-3 w-100">
+            <label class="form-label">ID</label> <input asp-for="Id" class="form-control " />
+            <span asp-validation-for="Id"></span>
+        </div>*@
+        <partial name="createEditSharedFormElements" />
+    </form>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
+</div>
 
-</head>
-<body>
-    <div style="height:100vh" class="d-flex align-items-center justify-content-center">
-        <form asp-action="create" class="d-flex flex-column align-items-center p-5 border border-3">
-            <div class="mb-3">
-                <label class="form-label">ID</label> <input asp-for="Id" class="form-control w-auto" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Name</label> <input asp-for="Name" class="form-control w-auto" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Capacity</label> <input asp-for="Capacity" class="form-control w-auto" />
-            </div>
-            <input type="submit" class="btn btn-success w-auto" />
-        </form>
-    </div>
-    
-</body>
-</html>
+@section Scripts{
+        <partial name="_ValidationScriptsPartial" />
+}

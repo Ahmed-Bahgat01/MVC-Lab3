@@ -1,19 +1,76 @@
 ﻿@model Student
+
 @{
-    Layout = null;
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_CLayout.cshtml";
 }
 
-<!DOCTYPE html>
+<div style="height:100vh" class="d-flex flex-column justify-content-center align-items-center">
+    <h1 class=" h1 w-50 text-center text-light bg-secondary border rounded rounded-3 pe-4 ps-4 pb-3 pt-2 text-decoration-underline">Details</h1>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-    <link rel = "stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-</head>
-<body>
-    <h1 class="alert-info text-center m-lg-2 rounded-circle">
-        @Model.Id   :   @Model.Name
-    </h1>
-</body>
-</html>
+    <div class="m-3 border border-1  w-50 p-4">
+        <h4 class=" text-center">Student @Model.Id</h4>
+        <hr />
+        <div class="d-flex flex-row justify-content-between ">
+            
+            <dl class="d-flex flex-column w-50 h-auto">
+                <div class="">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                </div>
+                <div>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Department)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @*@Html.DisplayFor(model => model.Department.Name)*@
+                        @Model?.Department?.Name
+                    </dd>
+                </div>
+            </dl>
+            <div class=" w-auto h-auto">
+                <img src="/images/students/profiles/@Model.ImageName" />
+                @if (Model.ImageName is not null)
+                {
+                    <div>
+                        <a class="btn btn-outline-primary" href="@Url.Action("DownloadProfileImage", "student",new{ImageName = Model.ImageName})">download Image</a>
+                    </div>
+                }
+            </div>
+            
+        </div>
+        @*@if (Model.ImageName is not null)
+        {
+            <div>
+                <a class="btn btn-outline-secondary" href="@Url.Action("DownloadProfileImage", "student",new{ImageName = Model.ImageName})">download Image</a>
+            </div>
+        }*@
+
+    </div>
+    <table class="table table-hover table-bordered w-50 m-3">
+        <thead class="bg-secondary text-light">
+            <tr>
+                <th>Subject</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model?.StudentCourses ?? new List<StudentCourse>())
+            {
+                <tr>
+                    <td>@item.Course?.Name</td>
+                    <td>@item.Grade</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="m-3 w-50 d-flex flex-row justify-content-center align-items-center justify-content-around">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-primary w-25">Edit</a>
+        <a asp-action="Index" class="btn btn-outline-dark w-25">Back to List</a>
+    </div>
+</div>
+

@@ -1,0 +1,44 @@
+﻿@model Department
+
+@{
+    ViewData["Title"] = "ShowCourses";
+    Layout = "~/Views/Shared/_CLayout.cshtml";
+}
+
+<h1>ShowCourses</h1>
+
+<table class="table table-bordered table-hover">
+    <thead class="bg-danger text-light">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Lecture Hours</th>
+            <th>Lab Hours</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model?.Courses.Count() == 0)
+        {
+            <tr colspan="4"> NO DATA</tr>
+        }
+        else
+        {
+            foreach (var item in Model?.Courses ?? new List<Course>())
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.LectureHours</td>
+                    <td>@item.LabHours</td>
+                    <td>
+                        <a asp-action="EditStudentsGrades" asp-route-deptId="@Model?.Id" asp-route-courseId="@item.Id" class="btn btn-dark">
+                            <i class="fa-regular fa-circle-info"></i>
+                            Edit Grades
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

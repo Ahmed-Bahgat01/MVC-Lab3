@@ -1,0 +1,13 @@
+﻿@model Department
+
+<div class="mb-3 w-100">
+    <label class="form-label">Name</label> <input asp-for="Name" class="form-control" />
+    @*<label asp-validation-for="Name" class="valid-feedback"></label>*@
+    <span asp-validation-for="Name"></span>
+</div>
+<div class="mb-3 w-100">
+    <label class="form-label ">Capacity</label> <input asp-for="Capacity" class="form-control " />
+    <span asp-validation-for="Capacity"></span>
+</div>
+<input type="submit" class="btn btn-success w-auto" />
+
